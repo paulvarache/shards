@@ -10,6 +10,32 @@ This way, a lazy loaded view, can have lazy loaded subview or sections, if files
 
 ## Usage
 
+### Your app code
+
+Let your entry file be `index.html` and look like this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Some very important views -->
+        <link rel="lazy-import" href="./elements/view-a.html" group="view-a">
+        <link rel="lazy-import" href="./elements/view-b.html" group="view-b">
+    </head>
+    <body>
+        <!--Your very important code-->
+        <!-- Where you grab the lazy-import elements and dynamically import the one needed right now -->
+    </body>
+</html>
+```
+
+Shards will take this file and create three bundles, `index.html`, `view-a.html` and `view-b.html` that will contain all the dependencies specific for these bundles. Nothing `view-a` specific will be bundled in `index.html` or `view-b.html`. BUT if a dependency of `view-a` is also present in `view-b`, this dependency will be bundled in `index.html`.
+
+If `view-a` or `view-b` also have in their dependency tree lazy imports, more sub-bundles will be created by shards.
+
 As this tool answers a very specific need, the API is simple. Provide the root folder of your application, the main entry point (as `shell`) relative to the root as well as the destination directory for the bundled files.
 
 ```js
