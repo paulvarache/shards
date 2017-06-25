@@ -1,5 +1,5 @@
 {
-  "name": "shards",
+  "name": "html-import-shards",
   "version": "1.0.0",
   "description": "Generates a tree of HTML imports dependencies and split bundles based on the lazy imports",
   "main": "index.js",
